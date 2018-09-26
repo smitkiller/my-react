@@ -1,4 +1,4 @@
-Start Redux Project
+## Start Redux Project
 
 ## Folder Structure
 
@@ -40,8 +40,10 @@ my-react/
     logo.svg
 ```
 
-Set up project
+## Set up project
+```
   git clone https://github.com/smitkiller/my-react.git
   cd my-react
   npm install
   npm start
+  ```
