@@ -16,6 +16,7 @@ render(
 				initialState={initialState} />
 		</AppContainer>,rootEl
 	)
+
 	if(module.hot){
 		module.hot.accept('./containers/Root',()=>{
 			const NextRootApp = require('./containers/Root').default
