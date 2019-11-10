@@ -3,6 +3,7 @@ import {
 	LOAD_PAGES_SUCCESS,
 	LOAD_PAGES_FAILURE
 	} from '../constants/actionTypes';
+import {database} from '../constants/configFirebase';
 
 export function loadPages(){
 	return dispatch=>{
@@ -12,27 +13,18 @@ export function loadPages(){
 }
 
 function loadData(){
-	const datas=[
-				{
-					'id':1,
-					 'name':'react',
-					 'lastname':'redux'
-				},
-				{
-					'id':2,
-					'name':'som',
-					'lastname':'cool'
-				}
-	]
-		if(datas !==''){
-			return dispatch=>{
-				dispatch(loadPagesSuccess(datas));
-			}
-		}else{
-			return dispatch=>{
-				dispatch(loadPagesFailure(datas));
-			}
-		}
+	return dispatch=>{
+		dispatch(loadPagesRequest());
+		database.ref('articles').once('value')
+		.then((snapshot)=>{
+			//console.log("snapshot===>",snapshot);
+			dispatch(loadPagesSuccess(snapshot.val()));
+		})
+		.catch((error)=>{
+			dispatch(loadPagesFailure());
+		})
+
+	}
 	
 }
 function loadPagesRequest(){

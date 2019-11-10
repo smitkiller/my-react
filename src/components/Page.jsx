@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import logo from '../logo.svg';
+import _ from 'lodash';
 
 const Page = ({pages})=>{
 	return(
@@ -10,11 +11,10 @@ const Page = ({pages})=>{
 			</header>
 			<p>Display Data </p>
 				{
-					pages.map((page,key)=>(
+					_.map(pages,(page,key)=>(
 										<div key={key}>
-											<p>ID			: {page.id}</p>
-											<p>Name      	: {page.name}</p>
-											<p>LastName 	: {page.lastname}</p>
+											<p>Name      	: {page.title}</p>
+											<p>LastName 	: {page.content}</p>
 										</div>
 									)
 								)
