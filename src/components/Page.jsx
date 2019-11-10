@@ -11,6 +11,7 @@ const Page = ({pages})=>{
 			</header>
 			<p>Display Data </p>
 				{
+					
 					_.map(pages,(page,key)=>(
 										<div key={key}>
 											<p>Name      	: {page.title}</p>

@@ -5,6 +5,7 @@ import {
 	} from '../constants/actionTypes';
 import {database} from '../constants/configFirebase';
 
+
 export function loadPages(){
 	return dispatch=>{
 		dispatch(loadPagesRequest());

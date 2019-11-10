@@ -10,6 +10,7 @@ var config ={
     appId: "1:357879572200:web:45e48ce680f90419550b5d"
 };
 
+
 firebase.initializeApp(config);
 
 export const database=firebase.database();
