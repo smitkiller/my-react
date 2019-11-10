@@ -39,6 +39,7 @@ my-react/
     index.js
     logo.svg
 ```
+## connect Redux with Firebase Realtime Database
 
 ## Set up project
 ```
