@@ -1,14 +1,15 @@
 import React from 'react';
-import '../App.css';
 import logo from '../logo.svg';
 import _ from 'lodash';
+import Typography from '@material-ui/core/Typography';
+import Icon from '@material-ui/core/Icon';
 
 const Page = ({pages})=>{
 	return(
 			<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo'/>
-			</header>
+			
+			<Icon>account_balance</Icon>
+			
 			<p>Display Data </p>
 				{
 					

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
-import {Page} from '../components';
+import {Page,NavTabs} from '../components';
 import {loadPages} from '../actions';
 import {connect} from 'react-redux';
 
@@ -17,9 +17,12 @@ class Pages extends Component{
 
 	render(){
 		return(
+			<div>
+			<NavTabs/>
 				<Page
 					pages={this.props.pages}
 				/>
+			</div>
 			)
 	}
 }
