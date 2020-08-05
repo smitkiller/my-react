@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import {Link} from 'react-router';
 
 
 class App extends Component {
@@ -14,8 +14,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+          <Link className="no_underline" to={{pathname:'/page'}}>
+            go to page
+          </Link>
         <div>
-          <p>Please sign-in:</p>
           
 
         </div>

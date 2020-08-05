@@ -1,13 +1,13 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
-import {Page,NavTabs} from '../components';
-import {loadPages} from '../actions';
+import {Page} from '../components';
+import {loadPages,insertData} from '../actions';
 import {connect} from 'react-redux';
+import {reduxForm} from 'redux-form';
+
 
 class Pages extends Component{
-	static propTypes={
 
-	}
 	onReloadPages=()=>{
 		this.props.onLoadPages()
 	}
@@ -15,18 +15,35 @@ class Pages extends Component{
 		this.onReloadPages()
 	}
 
+	/*componentDidUpdate(prevProps) {
+	  // Typical usage (don't forget to compare props):
+	  if (this.props.pages !== prevProps.pages) {
+	    	this.onReloadPages()
+	  }
+	}*/
 	render(){
+		const {handleSubmit} = this.props;
 		return(
 			<div>
-			<NavTabs/>
 				<Page
-					pages={this.props.pages}
-				/>
+					pages={this.props.pages} 
+					handleSubmit={handleSubmit}
+					/>
 			</div>
 			)
-	}
+		}
+	
 }
-export default connect(
+
+Pages = connect(
 		(state)=>({pages:state.pages}),
 		{onLoadPages:loadPages}
-	)(Pages)
+)(Pages)
+
+Pages = reduxForm({
+	form:'article-form',
+	onSubmit:(values,dispatch)=>dispatch(insertData(values))
+})(Pages)
+
+
+export default Pages;

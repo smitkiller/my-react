@@ -1,9 +1,15 @@
 import {
 	LOAD_PAGES_REQUEST,
 	LOAD_PAGES_SUCCESS,
-	LOAD_PAGES_FAILURE
+	LOAD_PAGES_FAILURE,
+
+	INSERT_PAGES_REQUEST,
+	INSERT_PAGES_SUCCESS,
+	INSERT_PAGES_FAILURE,
+
+
 	} from '../constants/actionTypes';
-import {database} from '../constants/configFirebase';
+import {database,ref} from '../constants/configFirebase';
 
 
 export function loadPages(){
@@ -12,6 +18,7 @@ export function loadPages(){
 		dispatch(loadData());
 	}
 }
+
 
 function loadData(){
 	return dispatch=>{
@@ -28,6 +35,38 @@ function loadData(){
 	}
 	
 }
+
+export function insertData(data){
+	return dispatch=>{
+		dispatch(insertRequest())
+		ref.child('articles').push().set(data,function(error){
+			if(error){
+				dispatch(insertFailure())
+			}else{
+				dispatch(insertSuccess())
+				dispatch(loadData())
+			}
+		})
+	}
+}
+
+function insertRequest(){
+	return{
+		type:INSERT_PAGES_REQUEST
+	}
+}
+
+function insertSuccess(){
+	return{
+		type:INSERT_PAGES_SUCCESS,
+	}
+}
+function insertFailure(){
+	return{
+		type:INSERT_PAGES_FAILURE
+	}
+}
+
 function loadPagesRequest(){
 	return{
 		type:LOAD_PAGES_REQUEST
