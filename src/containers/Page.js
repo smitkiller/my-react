@@ -1,10 +1,9 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {Page} from '../components';
-import {loadPages,insertData} from '../actions';
+import {loadPages,insertData,deleteData} from '../actions';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
-
 
 class Pages extends Component{
 
@@ -28,6 +27,7 @@ class Pages extends Component{
 				<Page
 					pages={this.props.pages} 
 					handleSubmit={handleSubmit}
+					onDelete={this.props.onDelete}
 					/>
 			</div>
 			)
@@ -37,13 +37,13 @@ class Pages extends Component{
 
 Pages = connect(
 		(state)=>({pages:state.pages}),
-		{onLoadPages:loadPages}
+		{onLoadPages:loadPages,onDelete:deleteData}
 )(Pages)
 
 Pages = reduxForm({
-	form:'article-form',
+	form:'information',
 	onSubmit:(values,dispatch)=>dispatch(insertData(values))
-})(Pages)
 
+})(Pages)
 
 export default Pages;
