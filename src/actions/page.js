@@ -11,18 +11,86 @@ import {
 	DEL_PAGES_SUCCESS,
 	DEL_PAGES_FAILURE,
 
+	LOAD_REQUEST,
+	LOAD_SUCCESS,
+	LOAD_FAILURE,
+
+	UPDATE_REQUEST,
+	UPDATE_SUCCESS,
+	UPDATE_FAILURE,
+
 	} from '../constants/actionTypes';
 import {database,ref} from '../constants/configFirebase';
 
-
-export function loadPages(){
+export function updateData(data){
 	return dispatch=>{
-		dispatch(loadPagesRequest());
-		dispatch(loadData());
+		dispatch(updateRequest());
+		database.ref('articles').child(data.id).update(data)
+		.then(()=>{
+			dispatch(updateSuccess());
+			dispatch(loadData());
+		})
+		.catch(()=>{
+			dispatch(updateFailure());
+		})
 	}
 }
 
-function loadData(){
+function updateRequest(){
+	return{
+		type:UPDATE_REQUEST
+	}
+}
+
+function updateSuccess(){
+	return{
+		type:UPDATE_SUCCESS
+	}
+}
+function updateFailure(){
+	return{
+		type:UPDATE_FAILURE
+	}
+}
+
+export function loadByID(data){
+	return dispatch=>{
+		dispatch(loadRequest());
+		database.ref('articles').child(data.id).once('value')
+		.then((snapshot)=>{
+			dispatch(loadSuccess(snapshot.val(),data.id));
+		})
+		.catch(()=>{
+			dispatch(loadFailure());
+		})
+	}
+
+}
+
+function loadRequest(){
+	return{
+		type:LOAD_REQUEST
+	}
+}
+
+function loadSuccess(data,id){
+	return{
+		type:LOAD_SUCCESS,
+		payload:{
+			id:id,
+			title:data.title,
+			content:data.content
+		}
+	}
+}
+function loadFailure(){
+	return{
+		type:LOAD_FAILURE
+	}
+}
+
+
+export function loadData(){
 	return dispatch=>{
 		dispatch(loadPagesRequest());
 		database.ref('articles').once('value')

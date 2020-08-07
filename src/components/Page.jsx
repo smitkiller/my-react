@@ -13,6 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {Edit} from '../containers';
 
 const useStyles = makeStyles({
   table: {
@@ -74,7 +75,8 @@ const Page = ({pages,handleSubmit,onDelete})=>{
           <TableRow>
             <TableCell>Title</TableCell>
             <TableCell>Content</TableCell>
-            <TableCell></TableCell>
+            <TableCell width="100"></TableCell>
+            <TableCell width="100"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,6 +85,7 @@ const Page = ({pages,handleSubmit,onDelete})=>{
               <TableCell>{page.title}</TableCell>
               <TableCell>{page.content}</TableCell>
               <TableCell><DeleteDialog id={key} onDelete={onDelete}/></TableCell>
+              <TableCell><Edit id={key}/></TableCell>
             </TableRow>
           ))}
         </TableBody>

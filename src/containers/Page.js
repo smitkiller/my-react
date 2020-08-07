@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import {Page} from '../components';
-import {loadPages,insertData,deleteData} from '../actions';
+import {loadData,insertData,deleteData} from '../actions';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 
@@ -37,7 +37,7 @@ class Pages extends Component{
 
 Pages = connect(
 		(state)=>({pages:state.pages}),
-		{onLoadPages:loadPages,onDelete:deleteData}
+		{onLoadPages:loadData,onDelete:deleteData}
 )(Pages)
 
 Pages = reduxForm({
