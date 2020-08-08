@@ -48,6 +48,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const required = value => (value ? undefined : 'Required')
+
 export default function FullScreenDialog({onLoadByID,handleSubmit}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -61,17 +63,13 @@ export default function FullScreenDialog({onLoadByID,handleSubmit}) {
     setOpen(false);
   };
 
-  const onSubmit = () => {
-    handleSubmit()
-    setOpen(false);
-  }
-
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         <EditIcon/>
       </Button>
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <form onSubmit={handleSubmit}>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -80,7 +78,7 @@ export default function FullScreenDialog({onLoadByID,handleSubmit}) {
             <Typography variant="h6" className={classes.title}>
               cancel
             </Typography>
-            <Button autoFocus color="inherit" onClick={onSubmit}>
+            <Button autoFocus color="inherit" type="submit"  onClick={handleClose}>
               save
             </Button>
           </Toolbar>
@@ -91,12 +89,12 @@ export default function FullScreenDialog({onLoadByID,handleSubmit}) {
             <h1 className="App-title">Display Data</h1>
           </header>
           <div>
-            <form>
               <div>
               <Field
                 name="title"
                 component={renderTextField}
                 label="Title"
+                validate={required}
                 />
               </div>
               <div>
@@ -104,11 +102,13 @@ export default function FullScreenDialog({onLoadByID,handleSubmit}) {
                 name="content"
                 component={renderTextField}
                 label="Content"
+                validate={required}
                 />
               </div>
-            </form>
+            
             </div>
           </div>
+          </form>
       </Dialog>
     </div>
   );

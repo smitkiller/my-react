@@ -6,12 +6,13 @@ import {reduxForm} from 'redux-form';
 
 class Edit extends Component{
 	render(){
-		const {id,handleSubmit} = this.props;
+		const {handleSubmit} = this.props;
 		return(
 				<div>
 					<EditDialog
 						onLoadByID={this.props.onLoadByID}
 						handleSubmit={handleSubmit}
+
 					/>
 				</div>
 

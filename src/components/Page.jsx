@@ -37,6 +37,8 @@ const renderTextField = ({
   />
 )
 
+const required = value => (value ? undefined : 'Required')
+
 const Page = ({pages,handleSubmit,onDelete})=>{
 	const classes = useStyles();
 	return(
@@ -52,6 +54,7 @@ const Page = ({pages,handleSubmit,onDelete})=>{
 	        			name="title"
 	        			component={renderTextField}
 	        			label="Title"
+                validate={required}
 	        			/>
 	        		</div>
 	        		<div>
@@ -59,6 +62,7 @@ const Page = ({pages,handleSubmit,onDelete})=>{
 	        			name="content"
 	        			component={renderTextField}
 	        			label="Content"
+                validate={required}
 	        			/>
 	        		</div>
 	        		<div>
