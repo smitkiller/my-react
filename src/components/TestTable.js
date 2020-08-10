@@ -5,8 +5,8 @@ import _ from 'lodash';
 export default function MaterialTableDemo({pages,onInsert,onDelete,onUpdate}) {
   const [state, setState] = React.useState({
     columns: [
-      { title: 'Title', field: 'title' },
-      { title: 'Content', field: 'content' },
+      { title: 'Title', field: 'title',validate: rowData => rowData.title === '' ? 'Required' : '', },
+      { title: 'Content', field: 'content',validate: rowData => rowData.content === '' ? 'Required' : '',  },
     ],
     data: [],
   });
@@ -24,27 +24,34 @@ state.data=(_.map(pages,(page,key)=>({
       data={state.data}
       editable={{
         onRowAdd: (newData) =>
-          new Promise((resolve) => {
+          new Promise((resolve,reject) => {
             setTimeout(() => {
-              resolve();
               setState((prevState) => {
                 const data = [...prevState.data];
-                onInsert(newData)
+                if(newData.title === undefined || newData.content === undefined){
+                  reject();
+                }else{
+                  resolve();
+                  onInsert(newData);
+                   
+                }
                 return { ...prevState, data };
               });
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
+          new Promise((resolve,reject) => {
             setTimeout(() => {
-              resolve();
-              if (oldData) {
                 setState((prevState) => {
                   const data = [...prevState.data];
-                  onUpdate(newData)
+                  if(newData.title === '' || newData.content === ''){
+                    reject();
+                  }else{
+                    resolve();
+                    onUpdate(newData);
+                  }
                   return { ...prevState, data };
                 });
-              }
             }, 600);
           }),
         onRowDelete: (oldData) =>

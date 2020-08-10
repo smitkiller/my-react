@@ -19,7 +19,7 @@ class TestTableCon extends Component{
 		        </header>
 		        <div>
 				{
-					!pages || pages == ''
+					!pages || pages === ''
 					?<div>Loading....</div>
 					:<TestTable
 						pages={pages}
