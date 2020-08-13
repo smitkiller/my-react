@@ -21,7 +21,19 @@ import {
 
 	} from '../constants/actionTypes';
 import {database,ref} from '../constants/configFirebase';
+import firebase from 'firebase';
 
+export const LoginWithGoogle=()=>{
+	var provider = new firebase.auth.GoogleAuthProvider();
+	provider.addScope('email');
+	provider.addScope('profile');
+	firebase.auth().signInWithPopup(provider).then((result)=>{
+		//console.log('result',result);
+	}).catch((error)=>{
+		//console.log('error',error);
+	})
+
+}
 export function updateData(data){
 	return dispatch=>{
 		dispatch(updateRequest());
