@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import {Link} from 'react-router';
 import {Button} from '@material-ui/core';
-import {LoginWithGoogle} from './actions';
+import {LoginWithGoogle,LoginWithFacebook} from './actions';
 import {firebaseAuth} from './constants/configFirebase';
 
 class App extends Component {
@@ -46,7 +46,12 @@ class App extends Component {
           !currentUser
           ? 
           <div>
+          <div>
           <Button onClick={LoginWithGoogle}>Login With Google</Button>
+          </div>
+          <div>
+          <Button onClick={LoginWithFacebook}>Login With Facebook</Button>
+          </div>
           </div>
           :
           <div> Hello {currentUser.displayName}

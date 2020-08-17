@@ -34,6 +34,17 @@ export const LoginWithGoogle=()=>{
 	})
 
 }
+
+export const LoginWithFacebook=()=>{
+	var provider = new firebase.auth.FacebookAuthProvider();
+	provider.addScope('user_birthday');
+	firebase.auth().signInWithPopup(provider).then((result)=>{
+		//console.log('result',result);
+	}).catch((error)=>{
+		//console.log('error',error);
+	})
+}
+
 export function updateData(data){
 	return dispatch=>{
 		dispatch(updateRequest());
